@@ -14,7 +14,7 @@ const MONGO_URL = process.env.MONGO_URI;
 app.use(express.json());
 
 // CORS - update origins as needed
-const allowedOrigins = ["http://localhost:5173", "https://health-q-fit.vercel.app"]; // Add your frontend URLs here
+const allowedOrigins = ["http://localhost:5173", "https://health-q-fit.vercel.app/login"]; // Add your frontend URLs here
 
 app.use(cors({
   origin: (origin, callback) => {
