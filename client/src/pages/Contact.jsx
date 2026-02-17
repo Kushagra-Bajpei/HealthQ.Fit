@@ -281,7 +281,7 @@ const Contact = () => {
                     <div>
                       <p className="text-sm text-gray-500">Address</p>
                       <p className="font-medium text-gray-900">
-                        123 Wellness Street, Health City, HC 12345
+                        123 Lucknow Khurram Nagar, Health City 
                       </p>
                     </div>
                   </div>
