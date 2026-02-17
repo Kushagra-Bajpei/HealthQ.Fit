@@ -107,4 +107,5 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: "Something went wrong" });
 });
 
-app.listen(port, () => console.log(`🚀 Server listening on port ${port}`));
+export default app;
+
