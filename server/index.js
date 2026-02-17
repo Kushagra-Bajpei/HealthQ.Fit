@@ -15,8 +15,7 @@ app.use(express.json());
 // Add your frontend URLs here
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://health-q-fit.vercel.app",
-  "https://health-q-fit-iw4f.vercel.app"
+  "https://health-q-fit.vercel.app"
 ];
 
 
