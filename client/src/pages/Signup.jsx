@@ -36,10 +36,10 @@ const Signup = () => {
           <UserPlus className="w-12 h-12 text-green-500" />
         </div>
         <h2 className="mt-6 text-center text-3xl font-bold text-gray-900">
-          Join NutriExpert
+          Join HealthQ.Fit
         </h2>
         <p className="mt-2 text-center text-sm text-gray-600">
-          Create your account to access personalized health services
+          Create your account for personalized nutrition and clinical health care.
         </p>
       </div>
 

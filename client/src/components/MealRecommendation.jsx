@@ -17,7 +17,7 @@ const MealRecommendation = () => {
 
     try {
       const prompt = `You are Dr. Arun Sharma's AI Clinical Nutritionist. Generate a structured 1-day meal plan for someone with the goal: "${goal}". Dietary preference: "${dietary}". Format with clear sections: Breakfast, Morning Snack, Lunch, Evening Snack, Dinner. Keep each meal concise with 2-3 items. End with a brief nutrition tip.`;
-      const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3000";
+      const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
       const res = await fetch(`${API_BASE}/api/v1/ai/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

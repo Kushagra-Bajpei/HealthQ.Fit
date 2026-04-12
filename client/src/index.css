@@ -1,13 +1,160 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
-@import "tailwindcss"; 
+@import "tailwindcss";
 
-*{
+/* ─── Global Font ─────────────────────────────────────────── */
+* {
   font-family: "Outfit", sans-serif;
 }
 
-@theme{
-  --color-primary: #10b981;
+/* ─── Tailwind v4 Dark Mode via class strategy ────────────── */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ─── CSS Design Tokens ─────────────────────────────────────
+   These variables are used throughout the app.
+   Switching .dark on <html> flips every color at once.
+────────────────────────────────────────────────────────────── */
+:root {
+  --bg-base:       #f9fafb;   /* gray-50  */
+  --bg-surface:    #ffffff;
+  --bg-surface-2:  #f3f4f6;   /* gray-100 */
+  --text-primary:  #111827;   /* gray-900 */
+  --text-secondary:#4b5563;   /* gray-600 */
+  --text-muted:    #9ca3af;   /* gray-400 */
+  --border:        #e5e7eb;   /* gray-200 */
+  --nav-bg:        rgba(255,255,255,0.85);
+  --nav-border:    rgba(229,231,235,0.5);
 }
 
+html.dark {
+  color-scheme: dark;
+  --bg-base:       #0f172a;   /* slate-900 */
+  --bg-surface:    #1e293b;   /* slate-800 */
+  --bg-surface-2:  #334155;   /* slate-700 */
+  --text-primary:  #f1f5f9;   /* slate-100 */
+  --text-secondary:#94a3b8;   /* slate-400 */
+  --text-muted:    #64748b;   /* slate-500 */
+  --border:        #334155;   /* slate-700 */
+  --nav-bg:        rgba(15,23,42,0.90);
+  --nav-border:    rgba(51,65,85,0.5);
+}
 
+/* ─── Apply tokens to base elements ─────────────────────── */
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
 
+/* ─── Dark mode overrides for common Tailwind utility patterns ──
+   Targets the most common white/gray surfaces used in this app.
+─────────────────────────────────────────────────────────────── */
+
+/* Cards & surfaces */
+html.dark .dark\:surface {
+  background-color: var(--bg-surface);
+}
+
+/* Headings & text auto-invert */
+html.dark h1, html.dark h2, html.dark h3,
+html.dark h4, html.dark h5, html.dark h6 {
+  color: var(--text-primary);
+}
+
+/* Common white backgrounds → dark surface */
+html.dark .bg-white {
+  background-color: var(--bg-surface) !important;
+}
+
+html.dark .bg-gray-50 {
+  background-color: var(--bg-base) !important;
+}
+
+html.dark .bg-gray-100 {
+  background-color: var(--bg-surface-2) !important;
+}
+
+html.dark .bg-gray-800 {
+  background-color: #0f172a !important;
+}
+
+html.dark .bg-gray-900 {
+  background-color: #020617 !important;
+}
+
+/* Text colors */
+html.dark .text-gray-900 {
+  color: var(--text-primary) !important;
+}
+
+html.dark .text-gray-800 {
+  color: #e2e8f0 !important;
+}
+
+html.dark .text-gray-700 {
+  color: #cbd5e1 !important;
+}
+
+html.dark .text-gray-600 {
+  color: var(--text-secondary) !important;
+}
+
+html.dark .text-gray-500 {
+  color: #64748b !important;
+}
+
+html.dark .text-gray-400 {
+  color: #475569 !important;
+}
+
+/* Borders */
+html.dark .border-gray-100 {
+  border-color: var(--border) !important;
+}
+
+html.dark .border-gray-200 {
+  border-color: #334155 !important;
+}
+
+/* Inputs */
+html.dark input,
+html.dark textarea,
+html.dark select {
+  background-color: #1e293b !important;
+  color: #f1f5f9 !important;
+  border-color: #334155 !important;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: #64748b !important;
+}
+
+/* Navbar backdrop */
+html.dark nav {
+  background-color: var(--nav-bg) !important;
+  border-color: var(--nav-border) !important;
+}
+
+/* Green gradient hero section — stays vibrant in dark mode */
+html.dark .from-green-50 {
+  --tw-gradient-from: #0d2a1a !important;
+}
+
+html.dark .to-green-50 {
+  --tw-gradient-to: #0d2a1a !important;
+}
+
+html.dark .via-white {
+  --tw-gradient-via: #0f172a !important;
+}
+
+/* Glassmorphism cards in hero */
+html.dark [class*="bg-white/"] {
+  background-color: rgba(30, 41, 59, 0.7) !important;
+  border-color: rgba(71, 85, 105, 0.5) !important;
+}
+
+/* Dark theme theme */
+@theme {
+  --color-primary: #10b981;
+}

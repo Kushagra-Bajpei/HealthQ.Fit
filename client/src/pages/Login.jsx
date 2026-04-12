@@ -78,9 +78,9 @@ const Login = () => {
           </p>
           <div className="flex items-center gap-3">
             <img
-              src="https://ui-avatars.com/api/?name=Dr+Arun+Sharma&background=ffffff&color=16a34a"
+              src="profile.jpeg"
               alt="Dr. Arun Sharma"
-              className="w-9 h-9 rounded-full border-2 border-white/30"
+              className="w-9 h-9 rounded-full border-2 border-white/30 object-cover"
             />
             <div>
               <p className="text-white font-semibold text-sm">Dr. Arun Sharma</p>

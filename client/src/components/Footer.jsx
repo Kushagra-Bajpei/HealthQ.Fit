@@ -1,17 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin, Instagram, Facebook, Twitter, Linkedin, Heart } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { user } = useAuth();
 
-  const quickLinks = [
+  // Public links — always visible (matches Navbar)
+  const navLinks = [
     { path: '/', label: 'Home' },
     { path: '/about', label: 'About Dr. Arun' },
     { path: '/services', label: 'Services' },
     { path: '/testimonials', label: 'Success Stories' },
     { path: '/blog', label: 'Health Blog' },
     { path: '/contact', label: 'Book Consultation' },
+  ];
+
+  // Shown in a separate column when logged in
+  const accountLinks = [
+    { path: '/dashboard', label: 'Dashboard' },
+    { path: '/plans', label: 'My Plans' },
+    { path: '/progress', label: 'Progress' },
+    { path: '/contact', label: 'Contact Us' },
   ];
 
   const services = [
@@ -36,7 +47,7 @@ const Footer = () => {
         <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-10">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link to="/" className="flex items-center space-x-3 mb-4">
+            <Link to={user ? '/dashboard' : '/'} className="flex items-center space-x-3 mb-4">
               <img
                 src="/logo.jpeg"
                 alt="HealthQ.Fit"
@@ -61,16 +72,13 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Navigation — always public */}
           <div>
             <h3 className="text-sm font-semibold text-green-400 uppercase tracking-wider mb-5">Navigation</h3>
             <ul className="space-y-3">
-              {quickLinks.map((link, i) => (
+              {navLinks.map((link, i) => (
                 <li key={i}>
-                  <Link
-                    to={link.path}
-                    className="text-gray-400 hover:text-white text-sm transition-colors duration-200"
-                  >
+                  <Link to={link.path} className="text-gray-400 hover:text-white text-sm transition-colors duration-200">
                     {link.label}
                   </Link>
                 </li>
@@ -78,22 +86,34 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Services */}
-          <div>
-            <h3 className="text-sm font-semibold text-green-400 uppercase tracking-wider mb-5">Our Services</h3>
-            <ul className="space-y-3">
-              {services.map((s, i) => (
-                <li key={i}>
-                  <Link
-                    to="/services"
-                    className="text-gray-400 hover:text-white text-sm transition-colors duration-200"
-                  >
-                    {s}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* My Account / Services Column */}
+          {user ? (
+            <div>
+              <h3 className="text-sm font-semibold text-green-400 uppercase tracking-wider mb-5">My Account</h3>
+              <ul className="space-y-3">
+                {accountLinks.map((link, i) => (
+                  <li key={i}>
+                    <Link to={link.path} className="text-gray-400 hover:text-white text-sm transition-colors duration-200">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <div>
+              <h3 className="text-sm font-semibold text-green-400 uppercase tracking-wider mb-5">Our Services</h3>
+              <ul className="space-y-3">
+                {services.map((s, i) => (
+                  <li key={i}>
+                    <Link to="/services" className="text-gray-400 hover:text-white text-sm transition-colors duration-200">
+                      {s}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           {/* Contact */}
           <div>

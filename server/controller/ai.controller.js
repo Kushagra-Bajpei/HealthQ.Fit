@@ -19,8 +19,8 @@ export const chatWithBotanist = async (req, res) => {
 
     const genAI = new GoogleGenerativeAI(apiKey.trim());
 
-    // Use gemini-1.5-flash (stable, fast, free tier available)
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    // gemini-2.0-flash — latest stable, fast, free-tier available
+    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
     const systemPrompt = `You are a professional AI health assistant for Dr. Arun Sharma's nutrition clinic, HealthQ.Fit.
 Your role is to:

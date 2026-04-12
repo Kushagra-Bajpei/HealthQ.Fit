@@ -49,7 +49,7 @@ app.get("/api/v1/auth/test", verifyFirebaseToken, (req, res) => {
 });
 
 // Health check
-app.get("/", (req, res) => res.json({ message: "Health N Hacks API running" }));
+app.get("/", (req, res) => res.json({ message: "HealthQ.Fit API running" }));
 
 // Error handler
 app.use((err, req, res, next) => {
@@ -57,7 +57,10 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: "Something went wrong" });
 });
 
-app.listen(port, () => console.log(`🚀 Server listening on port ${port}`));
+app.listen(port, () => {
+  console.log(`🚀 Server listening on port ${port}`);
+  console.log(`🔄 Environment variables reloaded.`);
+});
 
 
 

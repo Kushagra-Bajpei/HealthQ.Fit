@@ -269,10 +269,10 @@ const Services = () => {
               <span>Book Free Consultation</span>
             </Link>
             <a
-              href="tel:+15551234567"
+              href="tel:+919555000029"
               className="border-2 border-white text-white hover:bg-white hover:text-green-500 px-8 py-3 rounded-lg font-semibold text-lg transition duration-300 inline-flex items-center justify-center space-x-2"
             >
-              <span>Call: +1 (555) 123-4567</span>
+              <span>Call: +91 9555 xxx-x29</span>
             </a>
           </div>
         </div>

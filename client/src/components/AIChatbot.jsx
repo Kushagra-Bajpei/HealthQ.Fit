@@ -25,7 +25,7 @@ const AIChatbot = () => {
     setIsLoading(true);
 
     try {
-      const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3000";
+      const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
       const res = await fetch(`${API_BASE}/api/v1/ai/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -110,7 +110,7 @@ const AIChatbot = () => {
                     </div>
                     <div className={`px-3 py-2.5 rounded-xl text-sm leading-relaxed ${msg.role === "user" ? "bg-green-500 text-white rounded-br-none" : "bg-white border border-gray-100 text-gray-800 rounded-bl-none shadow-sm"}`}>
                       {msg.role === "ai" ? (
-                        <div className="space-y-0.5 text-xs">{formatMessage(msg.text)}</div>
+                        <div className="space-y-0.5">{formatMessage(msg.text)}</div>
                       ) : (
                         <span>{msg.text}</span>
                       )}
