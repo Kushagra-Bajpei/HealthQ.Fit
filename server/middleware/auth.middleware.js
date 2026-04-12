@@ -8,14 +8,21 @@ const keyPath = path.join(process.cwd(), "serviceAccountKey.json");
 
 // Initialize Firebase Admin only once
 if (!admin.apps.length) {
-  if (!fs.existsSync(keyPath)) {
-    console.warn("serviceAccountKey.json not found in backend root - Firebase Admin not initialized");
-  } else {
+  if (process.env.FIREBASE_SERVICE_ACCOUNT) {
+    const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+    admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount),
+    });
+    console.log("✅ Firebase Admin initialized from .env");
+  } else if (fs.existsSync(keyPath)) {
     const raw = fs.readFileSync(keyPath, "utf8");
     const serviceAccount = JSON.parse(raw);
     admin.initializeApp({
       credential: admin.credential.cert(serviceAccount),
     });
+    console.log("✅ Firebase Admin initialized from file");
+  } else {
+    console.warn("⚠️ Firebase credentials not found - Firebase Admin not initialized");
   }
 }
 
