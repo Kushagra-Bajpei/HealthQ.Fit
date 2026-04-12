@@ -1,194 +1,245 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CheckCircle, Award, Users, ArrowRight, Calendar, Phone } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { CheckCircle, Award, Users, ArrowRight, Calendar, Star, Quote } from 'lucide-react';
 import Views from '../components/Views';
+import Hero3D from '../components/Hero3D';
 
 const Home = () => {
   const services = [
-    {
-      icon: '🥗',
-      title: 'Personalized Meal Plans',
-      description: 'Custom nutrition plans tailored to your unique needs and goals'
-    },
-    {
-      icon: '🏃',
-      title: 'Weight Management',
-      description: 'Sustainable weight loss or gain strategies with ongoing support'
-    },
-    {
-      icon: '💪',
-      title: 'Sports Nutrition',
-      description: 'Performance optimization for athletes and active individuals'
-    },
-    {
-      icon: '❤️',
-      title: 'Heart Health',
-      description: 'Dietary strategies to support cardiovascular wellness'
-    }
+    { icon: '🥗', title: 'Personalized Meal Plans', desc: 'Custom nutrition maps tailored to your exact metabolic needs and lifestyle goals.' },
+    { icon: '📉', title: 'Clinical Weight Management', desc: 'Sustainable frameworks focusing on hormonal balance, not just caloric restriction.' },
+    { icon: '🔬', title: 'Diabetes/PCOS Reversal', desc: 'Specialized dietary interventions for managing and reversing chronic lifestyle disorders.' },
+    { icon: '⚡', title: 'Energy & Performance', desc: 'Optimized fueling strategies for athletes, executives, and high-performers.' }
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white selection:bg-green-100">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-green-50 to-blue-50 pt-32 pb-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden bg-gradient-to-br from-green-50 via-white to-green-50">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-green-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob" />
+        <div className="absolute top-0 -left-4 w-[500px] h-[500px] bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000" />
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h1 className="text-5xl font-bold text-gray-900 mb-6">
-                Transform Your Health Through Personalized Nutrition
+            
+            {/* Left Content */}
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
+              <div className="inline-flex items-center space-x-2 bg-green-100/80 text-green-700 px-4 py-2 rounded-full font-semibold text-sm mb-6 backdrop-blur-md border border-green-200 shadow-sm">
+                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                <span>Premium SaaS Nutrition Platform</span>
+              </div>
+              <h1 className="text-5xl lg:text-7xl font-extrabold text-gray-900 leading-tight mb-6 tracking-tight">
+                Biohack Your <br/>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-emerald-400">Health Paradigm</span>
               </h1>
-              <p className="text-xl text-gray-600 mb-8">
-                Get expert guidance from certified nutritionist Dr. Sarah Johnson. 
-                Create sustainable eating habits, achieve your health goals, and unlock 
-                your full potential with science-backed nutrition strategies.
+              <p className="text-xl text-gray-600 mb-8 max-w-lg leading-relaxed">
+                Elevate your physical and mental peak with <b>Dr. Arun Sharma</b>. Access bespoke dietary algorithms, precision tracking, and elite 1-on-1 lifestyle coaching.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link
-                  to="/contact"
-                  className="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition duration-300 transform hover:scale-105 flex items-center justify-center space-x-2"
-                >
-                  <Calendar size={20} />
-                  <span>Book Free Consultation</span>
+              
+              <div className="flex flex-col sm:flex-row gap-4 mb-10">
+                <Link to="/contact">
+                  <motion.button 
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="w-full sm:w-auto bg-green-500 hover:bg-green-600 shadow-xl shadow-green-500/30 text-white px-8 py-4 rounded-xl font-bold text-lg transition duration-300 flex items-center justify-center space-x-2"
+                  >
+                    <Calendar size={20} />
+                    <span>Book Your Discovery Call</span>
+                  </motion.button>
                 </Link>
-                <a
-                  href="tel:+15551234567"
-                  className="border-2 border-green-500 text-green-500 hover:bg-green-500 hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition duration-300 flex items-center justify-center space-x-2"
-                >
-                  <Phone size={20} />
-                  <span>Call Now</span>
-                </a>
               </div>
-              <div className="flex items-center space-x-6 mt-8">
-                <div className="flex items-center space-x-2">
-                  <Users className="w-6 h-6 text-green-500" />
-                  <span className="text-gray-700 font-medium">500+ Clients Helped</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Award className="w-6 h-6 text-green-500" />
-                  <span className="text-gray-700 font-medium">Certified Expert</span>
-                </div>
-              </div>
-            </div>
-            <div className="relative">
-              <img
-                src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                alt="Healthy food selection"
-                className="rounded-2xl shadow-2xl"
-              />
-              <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-lg">
+
+              {/* Trust Badges */}
+              <div className="flex items-center space-x-8 pt-6 border-t border-gray-200/60">
                 <div className="flex items-center space-x-3">
-                  <div className="bg-green-100 p-3 rounded-full">
-                    <CheckCircle className="w-8 h-8 text-green-500" />
+                  <div className="p-2.5 bg-green-100 rounded-xl">
+                    <Users className="w-6 h-6 text-green-600" />
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-gray-900">95%</p>
-                    <p className="text-gray-600">Success Rate</p>
+                    <p className="font-bold text-gray-900 text-lg">2000+</p>
+                    <p className="text-sm text-gray-500 font-medium">Lives Transformed</p>
+                  </div>
+                </div>
+                <div className="w-px h-12 bg-gray-200"></div>
+                <div className="flex items-center space-x-3">
+                  <div className="flex -space-x-2">
+                    {[1,2,3,4].map(i => (
+                      <img key={i} src={`https://ui-avatars.com/api/?name=User+${i}&background=random`} alt="User" className="w-10 h-10 rounded-full border-2 border-white"/>
+                    ))}
+                  </div>
+                  <div>
+                    <div className="flex text-yellow-400">
+                      {[1,2,3,4,5].map(i => <Star key={i} size={14} fill="currentColor" />)}
+                    </div>
+                    <p className="text-sm font-semibold text-gray-900">4.9/5 Rating</p>
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
+
+            {/* Right Content - 3D Object & Floating Cards */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.2 }}
+              className="relative h-[600px] w-full flex items-center justify-center"
+            >
+              {/* 3D Canvas element */}
+              <div className="absolute inset-0 z-0">
+                 <Hero3D />
+              </div>
+              
+              {/* Floating Testimonial Glass Card */}
+              <motion.div 
+                animate={{ y: [0, -15, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute top-10 right-0 max-w-xs bg-white/70 backdrop-blur-xl border border-white/50 p-6 rounded-2xl shadow-2xl z-10"
+              >
+                <div className="flex gap-2 text-green-500 mb-2">
+                  <Star size={16} fill="currentColor"/><Star size={16} fill="currentColor"/><Star size={16} fill="currentColor"/><Star size={16} fill="currentColor"/><Star size={16} fill="currentColor"/>
+                </div>
+                <p className="text-gray-800 font-medium text-sm italic mb-4 drop-shadow-sm">"Dr. Arun entirely transformed my relationship with food. I reversed my Type 2 Diabetes in 6 months."</p>
+                <div className="flex items-center gap-3">
+                  <img src="https://ui-avatars.com/api/?name=Sarah+J" alt="Sarah" className="w-8 h-8 rounded-full border border-gray-200" />
+                  <div>
+                    <p className="text-xs font-bold text-gray-900">Sarah Jenkins</p>
+                    <p className="text-[10px] text-gray-500">Corporate Executive</p>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Floating Metric Card */}
+              <motion.div 
+                animate={{ y: [0, 15, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                className="absolute bottom-20 left-0 bg-white/80 backdrop-blur-xl border border-white/50 p-5 rounded-2xl shadow-xl z-10 flex items-center gap-4"
+              >
+                <div className="bg-green-500 rounded-full p-3 text-white">
+                  <CheckCircle size={24} />
+                </div>
+                <div>
+                  <p className="text-2xl font-black text-gray-900">95%</p>
+                  <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Success Rate</p>
+                </div>
+              </motion.div>
+
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Services Section */}
-      <section className="py-20 bg-white">
+      {/* Doctor Branding Section */}
+      <section className="py-24 bg-gray-900 text-white relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
+              className="relative"
+            >
+              <div className="aspect-[4/5] rounded-3xl overflow-hidden border border-gray-800 shadow-2xl relative">
+                {/* Fallback image if doctor image isn't available */}
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent z-10"></div>
+                <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=1000&auto=format&fit=crop" alt="Dr. Arun Sharma" className="w-full h-full object-cover" />
+                <div className="absolute bottom-8 left-8 z-20">
+                  <h3 className="text-3xl font-bold">Dr. Arun Sharma</h3>
+                  <p className="text-green-400 font-medium">Chief Clinical Nutritionist & Founder</p>
+                </div>
+              </div>
+            </motion.div>
+            
+            <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+              <Quote className="text-green-500/20 w-24 h-24 absolute -mt-10 -ml-8" />
+              <h2 className="text-4xl font-bold mb-6 relative z-10">Pioneering Data-Driven Clinical Nutrition.</h2>
+              <p className="text-xl text-gray-400 mb-6 font-light leading-relaxed">
+                With over a decade of clinical experience, my philosophy relies entirely on quantifiable biomarkers paired with sustainable lifestyle shifts. No crash diets. No temporary fixes.
+              </p>
+              <ul className="space-y-4 mb-8">
+                {['MSc. Clinical Nutrition & Dietetics', 'Certified Diabetes Educator', 'Ex-Head of Nutrition at Apollo Hospitals', 'Published Health Researcher'].map((item, i) => (
+                  <li key={i} className="flex items-center space-x-3">
+                    <CheckCircle className="text-green-500 w-5 h-5 flex-shrink-0" />
+                    <span className="text-gray-300">{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <Link to="/about" className="inline-flex items-center space-x-2 text-green-400 hover:text-green-300 font-semibold text-lg group">
+                <span>Read Full Biography</span>
+                <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
+              </Link>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services SaaS Section */}
+      <section className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Personalized Nutrition Services
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Comprehensive nutrition solutions designed to meet your unique health needs and lifestyle
-            </p>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">The Optimization Protocols</h2>
+            <p className="text-xl text-gray-500 max-w-2xl mx-auto">Targeted nutrition algorithms designed for your specific biological requirements.</p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {services.map((service, index) => (
-              <div key={index} className="bg-gray-50 p-8 rounded-2xl hover:shadow-lg transition duration-300">
-                <div className="text-4xl mb-4">{service.icon}</div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
-                <p className="text-gray-600">{service.description}</p>
-              </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {services.map((s, i) => (
+              <motion.div 
+                key={i} 
+                whileHover={{ y: -10 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl hover:shadow-green-500/10 transition-all group"
+              >
+                <div className="text-5xl mb-6 bg-gray-50 w-20 h-20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">{s.icon}</div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">{s.title}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">{s.desc}</p>
+              </motion.div>
             ))}
           </div>
-          
-          <div className="text-center mt-12">
-            <Link
-              to="/services"
-              className="inline-flex items-center space-x-2 text-green-500 hover:text-green-600 font-semibold text-lg"
-            >
-              <span>View All Services</span>
-              <ArrowRight size={20} />
-            </Link>
-          </div>
         </div>
       </section>
 
-      {/* Views Component Section (Replaces Testimonials) */}
-      <section className="py-20 bg-gray-50">
+      {/* Transformations / Views */}
+      <section className="py-24 bg-white relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Success Stories
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              See how our personalized approach has helped clients achieve remarkable health transformations
-            </p>
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+            <div>
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">Clinical Outcomes.</h2>
+              <p className="text-xl text-gray-500">Real patients. Verified biomarkers. Lasting results.</p>
+            </div>
+            <Link to="/testimonials" className="bg-gray-100 hover:bg-gray-200 text-gray-900 px-6 py-3 rounded-xl font-semibold flex items-center gap-2 transition">
+              View Case Studies <ArrowRight size={18} />
+            </Link>
           </div>
           
-          {/* Views Component */}
           <Views />
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-green-500">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold text-white mb-6">
-            Ready to Start Your Health Journey?
-          </h2>
-          <p className="text-xl text-green-100 mb-8">
-            Get a free 15-minute consultation to discuss your goals and see how we can help you achieve them
-          </p>
-          <Link
-            to="/contact"
-            className="bg-white text-green-500 hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold text-lg transition duration-300 transform hover:scale-105 inline-flex items-center space-x-2"
-          >
-            <Calendar size={20} />
-            <span>Book Free Consultation</span>
-          </Link>
+      {/* Bottom CTA */}
+      <section className="py-24 bg-gradient-to-br from-green-600 to-green-800 text-white relative overflow-hidden">
+        <div className="absolute top-0 right-0 opacity-10 pointer-events-none">
+          <svg width="600" height="600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L2 22h20L12 2z" fill="currentColor" />
+          </svg>
         </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <CheckCircle className="w-8 h-8 text-green-500" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Science-Backed Approach</h3>
-              <p className="text-gray-600">Evidence-based nutrition strategies tailored to your unique needs</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Users className="w-8 h-8 text-green-500" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Ongoing Support</h3>
-              <p className="text-gray-600">Continuous guidance and adjustments to ensure long-term success</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Award className="w-8 h-8 text-green-500" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Certified Expertise</h3>
-              <p className="text-gray-600">Professional guidance from a certified nutrition specialist</p>
-            </div>
-          </div>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <h2 className="text-5xl font-black mb-6 tracking-tight">Ready to Audit Your Health?</h2>
+          <p className="text-xl text-green-100 mb-10 font-medium">Join the elite platform and get absolute clarity on your biological potential.</p>
+          <Link to="/contact">
+            <motion.button 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-white text-green-700 px-10 py-5 rounded-2xl font-black text-xl shadow-2xl transition duration-300 flex items-center justify-center space-x-3 mx-auto"
+            >
+              <Calendar size={24} />
+              <span>Apply For Coaching</span>
+            </motion.button>
+          </Link>
         </div>
       </section>
     </div>
@@ -196,6 +247,3 @@ const Home = () => {
 };
 
 export default Home;
-
-
-

@@ -3,6 +3,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import contactRoutes from "./routes/contact.route.js";
+import aiRoutes from "./routes/ai.route.js";
 import { verifyFirebaseToken } from "./middleware/auth.middleware.js";
 
 const app = express();
@@ -40,6 +41,7 @@ mongoose
 
 // Routes
 app.use("/api/v1/contact", contactRoutes);
+app.use("/api/v1/ai", aiRoutes);
 
 // Simple protected test route to verify token works
 app.get("/api/v1/auth/test", verifyFirebaseToken, (req, res) => {

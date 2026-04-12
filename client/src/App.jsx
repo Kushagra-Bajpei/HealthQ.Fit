@@ -16,78 +16,37 @@ import PrivateRoute from './components/PrivateRoute'
 import { AuthProvider } from './contexts/AuthContext'
 
 
+import Dashboard from './pages/Dashboard'
+import MyPlans from './pages/MyPlans'
+import Progress from './pages/Progress'
+import AIChatbot from './components/AIChatbot'
+
 const App = () => {
   return (
     <AuthProvider>
-      <div className="min-h-screen flex flex-col bg-gray-900">
+      <div className="min-h-screen flex flex-col bg-gray-50">
         <ScrollToTop />
         
-        {/* Routes without Navbar & Footer (Login/Signup) */}
         <Routes>
+          {/* Auth Routes */}
           <Route path='/login' element={<Login />}/>
           <Route path='/signup' element={<Signup />}/>
-        </Routes>
 
-        {/* Routes with Navbar & Footer (All other pages) */}
-        <Routes>
-          {/* Protected Routes (All other pages require login) */}
-          <Route path='/' element={
-            <PrivateRoute>
-              <WithLayout>
-                <Home />
-              </WithLayout>
-            </PrivateRoute>
-          }/>
-          <Route path='/about' element={
-            <PrivateRoute>
-              <WithLayout>
-                <About />
-              </WithLayout>
-            </PrivateRoute>
-          }/>
-          <Route path='/services' element={
-            <PrivateRoute>
-              <WithLayout>
-                <Services />
-              </WithLayout>
-            </PrivateRoute>
-          }/>
-          <Route path='/testimonials' element={
-            <PrivateRoute>
-              <WithLayout>
-                <Testimonials />
-              </WithLayout>
-            </PrivateRoute>
-          }/>
-          <Route path='/blog' element={
-            <PrivateRoute>
-              <WithLayout>
-                <Blog />
-              </WithLayout>
-            </PrivateRoute>
-          }/>
-          <Route path='/blog/:id' element={
-            <PrivateRoute>
-              <WithLayout>
-                <BlogPost />
-              </WithLayout>
-            </PrivateRoute>
-          }/>
-          <Route path='/contact' element={
-            <PrivateRoute>
-              <WithLayout>
-                <Contact />
-              </WithLayout>
-            </PrivateRoute>
-          }/>
-          {/* Redirect any unknown route to home */}
-          <Route path='*' element={
-            <PrivateRoute>
-              <WithLayout>
-                <Home />
-              </WithLayout>
-            </PrivateRoute>
-          }/>
+          {/* Public Routes */}
+          <Route path='/' element={<WithLayout><Home /></WithLayout>}/>
+          <Route path='/about' element={<WithLayout><About /></WithLayout>}/>
+          <Route path='/services' element={<WithLayout><Services /></WithLayout>}/>
+          <Route path='/testimonials' element={<WithLayout><Testimonials /></WithLayout>}/>
+          <Route path='/blog' element={<WithLayout><Blog /></WithLayout>}/>
+          <Route path='/blog/:id' element={<WithLayout><BlogPost /></WithLayout>}/>
+          <Route path='/contact' element={<WithLayout><Contact /></WithLayout>}/>
+
+          {/* Protected Routes */}
+          <Route path='/dashboard' element={<PrivateRoute><WithLayout><Dashboard /></WithLayout></PrivateRoute>}/>
+          <Route path='/plans' element={<PrivateRoute><WithLayout><MyPlans /></WithLayout></PrivateRoute>}/>
+          <Route path='/progress' element={<PrivateRoute><WithLayout><Progress /></WithLayout></PrivateRoute>}/>
+          
+          <Route path='*' element={<WithLayout><Home /></WithLayout>}/>
         </Routes>
       </div>
     </AuthProvider>
@@ -103,6 +62,7 @@ const WithLayout = ({ children }) => {
         {children}
       </main>
       <Footer />
+      <AIChatbot />
     </>
   )
 }
