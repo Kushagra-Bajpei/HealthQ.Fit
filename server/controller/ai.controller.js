@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import Groq from "groq-sdk";
 
 export const chatWithBotanist = async (req, res) => {
   try {
@@ -7,20 +7,18 @@ export const chatWithBotanist = async (req, res) => {
       return res.status(400).json({ error: "Prompt is required" });
     }
 
-    const apiKey = process.env.GEMINI_API_KEY;
+    const apiKey = process.env.GROQ_API_KEY;
 
-    // Guard: Check key exists and is not the placeholder
-    if (!apiKey || apiKey === "YOUR_GEMINI_API_KEY_HERE" || apiKey.trim() === "") {
-      console.error("❌ GEMINI_API_KEY is not set. Add your key to server/.env");
+    if (!apiKey || apiKey.trim() === "") {
+      console.error("❌ GROQ_API_KEY is not set. Add your key to server/.env");
       return res.status(500).json({
         error: "AI service is not configured. Please contact the administrator."
       });
     }
 
-    const genAI = new GoogleGenerativeAI(apiKey.trim());
-
-    // gemini-2.0-flash — latest stable, fast, free-tier available
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+    const groq = new Groq({
+      apiKey: apiKey.trim()
+    });
 
     const systemPrompt = `You are a professional AI health assistant for Dr. Arun Sharma's nutrition clinic, HealthQ.Fit.
 Your role is to:
@@ -33,30 +31,36 @@ Rules:
 - Keep responses short and to the point (max 200 words)
 - Use clear formatting with bullet points when listing items
 - Be warm, professional, and encouraging
-- Do NOT provide diagnosis or replace medical advice
+- Do NOT provide diagnosis or replace medical advice`;
 
-User question: ${prompt.trim()}`;
+    const response = await groq.chat.completions.create({
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: prompt.trim() }
+      ],
+      model: "llama-3.3-70b-versatile",
+      temperature: 0.7,
+      max_tokens: 1024,
+      top_p: 1,
+      stream: false,
+    });
 
-    const result = await model.generateContent(systemPrompt);
-    const text = result.response.text();
+    const text = response.choices[0]?.message?.content || "";
 
-    console.log("✅ AI response generated for prompt:", prompt.substring(0, 50));
+    console.log("✅ AI response generated (Groq) for prompt:", prompt.substring(0, 50));
     res.status(200).json({ reply: text });
 
   } catch (error) {
-    console.error("❌ AI Chat Error:", error.message || error);
+    console.error("❌ Groq AI Error:", error.message || error);
 
-    // Provide helpful error messages
-    if (error.message?.includes("API_KEY_INVALID") || error.message?.includes("API key not valid")) {
-      return res.status(500).json({ error: "Invalid Gemini API key. Please update your GEMINI_API_KEY in server/.env" });
+    if (error.status === 401) {
+      return res.status(500).json({ error: "Invalid Groq API key. Please check your GROQ_API_KEY." });
     }
-    if (error.message?.includes("PERMISSION_DENIED")) {
-      return res.status(500).json({ error: "Gemini API permission denied. Check your API key permissions." });
-    }
-    if (error.message?.includes("quota")) {
-      return res.status(429).json({ error: "API quota exceeded. Please try again later." });
+    
+    if (error.status === 400 || error.status === 402 || error.status === 403) {
+      return res.status(400).json({ error: `Billing or Authorization error: ${error.message}` });
     }
 
-    res.status(500).json({ error: "Failed to generate AI response. Please try again later." });
+    res.status(500).json({ error: error.message || "Failed to generate AI response. Please try again later." });
   }
 };

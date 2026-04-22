@@ -35,7 +35,7 @@ const AIChatbot = () => {
       if (!res.ok) throw new Error(data.error || "Failed to get response");
       setMessages((prev) => [...prev, { role: "ai", text: data.reply }]);
     } catch (error) {
-      setMessages((prev) => [...prev, { role: "ai", text: "Sorry, I'm having connectivity issues. Please ensure the AI API key is configured and try again." }]);
+      setMessages((prev) => [...prev, { role: "ai", text: error.message }]);
     } finally {
       setIsLoading(false);
     }

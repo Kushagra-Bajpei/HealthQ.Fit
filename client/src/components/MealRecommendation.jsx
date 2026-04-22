@@ -64,7 +64,7 @@ const MealRecommendation = () => {
         </div>
         <div>
           <h3 className="font-bold text-lg text-gray-900">AI Meal Plan Generator</h3>
-          <p className="text-sm text-gray-500">Powered by Gemini AI</p>
+          <p className="text-sm text-gray-500">Powered by Grok AI</p>
         </div>
       </div>
 
