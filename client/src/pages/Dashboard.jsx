@@ -73,8 +73,8 @@ const Dashboard = () => {
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }}
               className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex items-center gap-5"
             >
-              <div className={`${s.color} bg-opacity-10 p-3 rounded-2xl`}>
-                <s.icon className={`w-7 h-7 text-white`} style={{ filter: 'drop-shadow(0 0 4px rgba(0,0,0,0.2))' }} />
+              <div className={`${s.color} p-3 rounded-2xl`}>
+                <s.icon className="w-7 h-7 text-white" />
               </div>
               <div>
                 <p className="text-2xl font-black text-gray-900">{s.value}</p>
@@ -104,11 +104,10 @@ const Dashboard = () => {
                 <button
                   key={habit.id}
                   onClick={() => toggleHabit(habit.id)}
-                  className={`w-full flex items-center gap-3 p-3 rounded-xl border transition-all text-left ${
-                    checked[habit.id]
+                  className={`w-full flex items-center gap-3 p-3 rounded-xl border transition-all text-left ${checked[habit.id]
                       ? 'border-green-200 bg-green-50'
                       : 'border-gray-100 hover:border-gray-200 hover:bg-gray-50'
-                  }`}
+                    }`}
                 >
                   {checked[habit.id]
                     ? <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />

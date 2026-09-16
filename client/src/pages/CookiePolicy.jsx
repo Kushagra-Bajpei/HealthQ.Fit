@@ -1,7 +1,7 @@
 import React from 'react';
 
 const CookiePolicy = () => (
-  <div className="max-w-4xl mx-auto px-6 py-12 text-gray-800">
+  <div className="max-w-4xl mx-auto px-6 pt-28 pb-16 min-h-screen text-gray-800">
     <h1 className="text-3xl font-bold mb-4 text-green-500">Cookie Policy</h1>
     <p>HealthQ.Fit uses cookies to enhance your browsing experience and analyze site traffic.</p>
     <h2 className="text-xl font-semibold mt-6">What Are Cookies?</h2>

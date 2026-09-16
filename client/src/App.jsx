@@ -7,6 +7,9 @@ import Testimonials from './pages/Testimonials'
 import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
 import Contact from './pages/Contact'
+import PrivacyPolicy from './pages/PrivacyPolicy'
+import TermsOfService from './pages/TermsOfService'
+import CookiePolicy from './pages/CookiePolicy'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Navbar from "./components/Navbar";
@@ -26,27 +29,30 @@ const App = () => {
     <AuthProvider>
       <div className="min-h-screen flex flex-col bg-gray-50">
         <ScrollToTop />
-        
+
         <Routes>
           {/* Auth Routes */}
-          <Route path='/login' element={<Login />}/>
-          <Route path='/signup' element={<Signup />}/>
+          <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<Signup />} />
 
           {/* Public Routes */}
-          <Route path='/' element={<WithLayout><Home /></WithLayout>}/>
-          <Route path='/about' element={<WithLayout><About /></WithLayout>}/>
-          <Route path='/services' element={<WithLayout><Services /></WithLayout>}/>
-          <Route path='/testimonials' element={<WithLayout><Testimonials /></WithLayout>}/>
-          <Route path='/blog' element={<WithLayout><Blog /></WithLayout>}/>
-          <Route path='/blog/:id' element={<WithLayout><BlogPost /></WithLayout>}/>
-          <Route path='/contact' element={<WithLayout><Contact /></WithLayout>}/>
+          <Route path='/' element={<WithLayout><Home /></WithLayout>} />
+          <Route path='/about' element={<WithLayout><About /></WithLayout>} />
+          <Route path='/services' element={<WithLayout><Services /></WithLayout>} />
+          <Route path='/testimonials' element={<WithLayout><Testimonials /></WithLayout>} />
+          <Route path='/blog' element={<WithLayout><Blog /></WithLayout>} />
+          <Route path='/blog/:id' element={<WithLayout><BlogPost /></WithLayout>} />
+          <Route path='/contact' element={<WithLayout><Contact /></WithLayout>} />
+          <Route path='/privacy' element={<WithLayout><PrivacyPolicy /></WithLayout>} />
+          <Route path='/terms' element={<WithLayout><TermsOfService /></WithLayout>} />
+          <Route path='/cookies' element={<WithLayout><CookiePolicy /></WithLayout>} />
 
           {/* Protected Routes */}
-          <Route path='/dashboard' element={<PrivateRoute><WithLayout><Dashboard /></WithLayout></PrivateRoute>}/>
-          <Route path='/plans' element={<PrivateRoute><WithLayout><MyPlans /></WithLayout></PrivateRoute>}/>
-          <Route path='/progress' element={<PrivateRoute><WithLayout><Progress /></WithLayout></PrivateRoute>}/>
-          
-          <Route path='*' element={<WithLayout><Home /></WithLayout>}/>
+          <Route path='/dashboard' element={<PrivateRoute><WithLayout><Dashboard /></WithLayout></PrivateRoute>} />
+          <Route path='/plans' element={<PrivateRoute><WithLayout><MyPlans /></WithLayout></PrivateRoute>} />
+          <Route path='/progress' element={<PrivateRoute><WithLayout><Progress /></WithLayout></PrivateRoute>} />
+
+          <Route path='*' element={<WithLayout><Home /></WithLayout>} />
         </Routes>
       </div>
     </AuthProvider>

@@ -12,11 +12,11 @@ const MONGO_URL = process.env.MONGO_URI;
 
 app.use(express.json());
 
-// Add your frontend URLs here
+// ── CORS ─────────────────────────────────────────────────
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174",
-  "http://localhost:5175"
+  "http://localhost:5175",
 ];
 
 app.use(cors({
@@ -30,40 +30,54 @@ app.use(cors({
   credentials: true
 }));
 
-// Connect to MongoDB
-mongoose
-  .connect(MONGO_URL)
-  .then(() => console.log("✅ Connected to MongoDB"))
-  .catch((err) => {
-    console.error("❌ MongoDB Connection Error:", err);
-    process.exit(1);
-  });
+// ── MongoDB — retry on failure (no hard crash) ────────────
+const connectDB = async () => {
+  if (!MONGO_URL) {
+    console.error("❌ MONGO_URI is not set in .env — MongoDB will not connect.");
+    return;
+  }
+  try {
+    await mongoose.connect(MONGO_URL);
+    console.log("✅ Connected to MongoDB");
+  } catch (err) {
+    console.error("❌ MongoDB Connection Error:", err.message);
+    if (err.code === "ENOTFOUND") {
+      console.error("   → DNS lookup failed. Check:");
+      console.error("     1. MongoDB Atlas → Network Access → Add your current IP (or 0.0.0.0/0 for dev)");
+      console.error("     2. That your internet connection is active");
+      console.error("     3. Visit: https://cloud.mongodb.com — verify the cluster is running");
+    }
+    console.log("🔁 Retrying MongoDB connection in 5 seconds...");
+    setTimeout(connectDB, 5000);
+  }
+};
 
-// Routes
+connectDB();
+
+// ── Routes ───────────────────────────────────────────────
 app.use("/api/v1/contact", contactRoutes);
 app.use("/api/v1/ai", aiRoutes);
 
-// Simple protected test route to verify token works
+// Protected test route
 app.get("/api/v1/auth/test", verifyFirebaseToken, (req, res) => {
   return res.json({ ok: true, uid: req.user.uid, email: req.user.email });
 });
 
-// Health check
-app.get("/", (req, res) => res.json({ message: "HealthQ.Fit API running" }));
+// Health check — also shows DB status
+app.get("/", (req, res) =>
+  res.json({
+    message: "HealthQ.Fit API running",
+    db: mongoose.connection.readyState === 1 ? "connected" : "disconnected",
+  })
+);
 
-// Error handler
+// ── Global error handler ─────────────────────────────────
 app.use((err, req, res, next) => {
   console.error("Server Error:", err.message || err);
   res.status(500).json({ error: "Something went wrong" });
 });
 
+// ── Start server ─────────────────────────────────────────
 app.listen(port, () => {
   console.log(`🚀 Server listening on port ${port}`);
-  console.log(`🔄 Environment variables reloaded.`);
 });
-
-
-
-
-
-

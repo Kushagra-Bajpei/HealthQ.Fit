@@ -1,7 +1,7 @@
 import React from 'react';
 
 const TermsOfService = () => (
-  <div className="max-w-4xl mx-auto px-6 py-12 text-gray-800">
+  <div className="max-w-4xl mx-auto px-6 pt-28 pb-16 min-h-screen text-gray-800">
     <h1 className="text-3xl font-bold mb-4 text-green-500">Terms of Service</h1>
     <p>
       By using HealthQ.Fit, you agree to comply with our Terms of Service. Please read these terms carefully.

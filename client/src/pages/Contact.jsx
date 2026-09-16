@@ -51,7 +51,7 @@ const Contact = () => {
         token = await user.getIdToken();
       }
 
-      const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3000";
+      const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
       const headers = { "Content-Type": "application/json" };
       if (token) headers["Authorization"] = `Bearer ${token}`;
 
