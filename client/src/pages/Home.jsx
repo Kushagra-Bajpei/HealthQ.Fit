@@ -16,7 +16,7 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-white selection:bg-green-100">
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden bg-gradient-to-br from-green-50 via-white to-green-50">
+      <section className="relative pt-28 pb-12 lg:pt-32 lg:pb-16 overflow-hidden bg-gradient-to-br from-green-50 via-white to-green-50">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-green-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob" />
         <div className="absolute top-0 -left-4 w-[500px] h-[500px] bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000" />
 
