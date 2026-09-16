@@ -7,6 +7,13 @@
 
 ---
 
+## 🔗 Live URLs (Quick Access)
+
+- 🌍 **Frontend Website (Vercel):** [https://health-q-fit.vercel.app/](https://health-q-fit.vercel.app/)
+- ⚙️ **Backend API Server (Render):** [https://healthq-fit.onrender.com/](https://healthq-fit.onrender.com/)
+
+---
+
 ## 📋 Table of Contents
 
 - [Overview](#-overview)

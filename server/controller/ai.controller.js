@@ -38,7 +38,7 @@ Rules:
         { role: "system", content: systemPrompt },
         { role: "user", content: prompt.trim() }
       ],
-      model: "llama-3.3-70b-versatile",
+      model: "llama3-70b-8192",
       temperature: 0.7,
       max_tokens: 1024,
       top_p: 1,
@@ -56,7 +56,7 @@ Rules:
     if (error.status === 401) {
       return res.status(500).json({ error: "Invalid Groq API key. Please check your GROQ_API_KEY." });
     }
-    
+
     if (error.status === 400 || error.status === 402 || error.status === 403) {
       return res.status(400).json({ error: `Billing or Authorization error: ${error.message}` });
     }
