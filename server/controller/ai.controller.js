@@ -38,7 +38,7 @@ Rules:
         { role: "system", content: systemPrompt },
         { role: "user", content: prompt.trim() }
       ],
-      model: "llama3-70b-8192",
+      model: "llama-3.1-8b-instant",
       temperature: 0.7,
       max_tokens: 1024,
       top_p: 1,
